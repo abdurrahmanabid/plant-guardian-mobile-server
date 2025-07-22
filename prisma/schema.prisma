@@ -13,3 +13,32 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id       String     @id @default(auto()) @map("_id") @db.ObjectId
+  name     String
+  email    String
+  phone    String?
+  address  Address?
+  role     Role
+  diagonis Diagonis[]
+}
+
+model Diagonis {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  diagonis User   @relation(fields: [userId], references: [id])
+  userId   String @db.ObjectId
+}
+
+// Address is an embedded document
+type Address {
+  street String
+  city   String
+  state  String
+}
+
+// Access role
+enum Role {
+  Doctor
+  Farmer
+}
