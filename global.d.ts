@@ -2,7 +2,8 @@
 declare namespace NodeJS {
   interface ProcessEnv {
     JWT_SECRET: string;
-    PORT:number
+    PORT:number,
+    SALT:string
     // Add any other environment variables you're using here
   }
 }
