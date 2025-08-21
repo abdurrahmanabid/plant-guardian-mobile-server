@@ -4,6 +4,7 @@ import { signInController } from "../controller/signInController";
 import { isLoggedIn } from "../middleware/isLoggedIn";
 import uploadHandler from "@abdurrahmanabid/multi-file-upload";
 import { getUser } from "../controller/getUser";
+import { signout } from "../controller/signoutController";
 
 const router = Router();
 
@@ -15,5 +16,5 @@ router.post(
   uploadHandler("single", ["image/jpeg", "image/png"], "uploads/avatars")
 ); // api/user/upload-avatar
 router.get("/get-user", isLoggedIn, getUser); // api/user/get-user
-
+router.get("/signout", signout);
 export default router;
