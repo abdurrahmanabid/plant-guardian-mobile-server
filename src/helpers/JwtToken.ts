@@ -1,4 +1,4 @@
-import { NextFunction, Response } from "express";
+import { CookieOptions, NextFunction, Response } from "express";
 import { getJwtToken } from "./getJwtToken";
 
 export const jwtToken = (user: any, res: Response) => {
@@ -7,9 +7,12 @@ export const jwtToken = (user: any, res: Response) => {
 
     // Set cookie expiration to match the token's expiration
     const expiresIn = 24 * 60 * 60 * 1000; // 1 day in milliseconds
-    const options: { expires: Date; httpOnly: boolean } = {
-      expires: new Date(Date.now() + expiresIn),  // Token and cookie expire after 1 day
-      httpOnly: true, // Prevent client-side access to the cookie
+    const options: CookieOptions = {
+      expires: new Date(Date.now() + expiresIn),
+      httpOnly: true,
+      secure: false, // DEV: http হলে false
+      sameSite: "lax", // union literal: 'lax' | 'strict' | 'none'
+      path: "/",
     };
 
     // Remove sensitive data (e.g., password)
@@ -23,6 +26,8 @@ export const jwtToken = (user: any, res: Response) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, message: "Failed to generate token" });
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to generate token" });
   }
 };

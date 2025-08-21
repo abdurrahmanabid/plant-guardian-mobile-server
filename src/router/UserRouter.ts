@@ -9,7 +9,7 @@ const router = Router();
 
 //routes
 router.post("/signup", signUpController); // api/user/signup
-router.post("/signin", isLoggedIn, signInController); // api/user/signin
+router.post("/signin", signInController); // api/user/signin
 router.post(
   "/upload-avatar",
   uploadHandler("single", ["image/jpeg", "image/png"], "uploads/avatars")
