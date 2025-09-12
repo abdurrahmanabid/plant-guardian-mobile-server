@@ -3,6 +3,8 @@ import "dotenv/config";
 import cookieParser from "cookie-parser";
 import userRouter from "./router/UserRouter";
 import predictRouter from "./router/PredictedModelRouter";
+import gptRoute from "./router/GPTRouter";
+
 import path from "path";
 import cors from "cors";
 const app = express();
@@ -20,6 +22,7 @@ app.use(cors({ origin: FRONTEND, credentials: true }));
 // api
 app.use("/api/user", userRouter);
 app.use("/api/predict", predictRouter);
+app.use("/api/gpt", gptRoute);
 
 //server start
 app.listen(PORT, () => {

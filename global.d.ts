@@ -6,6 +6,7 @@ declare namespace NodeJS {
     SALT: string;
     PREDICT_SITE: string;
     FRONTEND_SITE: string;
+    GITHUB_TOCKEN: string;
     // Add any other environment variables you're using here
   }
 }
