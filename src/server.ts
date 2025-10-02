@@ -5,6 +5,8 @@ import userRouter from "./router/UserRouter";
 import predictRouter from "./router/PredictedModelRouter";
 import gptRoute from "./router/GPTRouter";
 import modelRoute from "./router/ModelSaveRouter";
+import soilPredictionRoute from "./router/SoilPredictionRouter";
+import soilModelRoute from "./router/SoilModelRouter";
 
 import path from "path";
 import cors from "cors";
@@ -25,6 +27,8 @@ app.use("/api/user", userRouter);
 app.use("/api/predict", predictRouter);
 app.use("/api/gpt", gptRoute);
 app.use("/api/model", modelRoute);
+app.use("/api/soil", soilPredictionRoute);
+app.use("/api/soil-model", soilModelRoute);
 
 //server start
 app.listen(PORT, () => {

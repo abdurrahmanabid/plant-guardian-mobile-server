@@ -15,16 +15,17 @@ datasource db {
 }
 
 model User {
-  id       String       @id @default(auto()) @map("_id") @db.ObjectId
-  name     String
-  email    String       @unique
-  phone    String?      @unique
-  password String
-  address  Address?
-  role     Role
-  diagonis Diagonis[]
-  images   ImageModel[]
-  soils    SoilModel[]
+  id             String              @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  email          String              @unique
+  phone          String?             @unique
+  password       String
+  address        Address?
+  role           Role
+  diagonis       Diagonis[]
+  images         ImageModel[]
+  soils          SoilAndImageModel[]
+  SoilPrediction SoilPrediction[]
 }
 
 model Diagonis {
@@ -45,7 +46,7 @@ model ImageModel {
   userId      String   @db.ObjectId
 }
 
-model SoilModel {
+model SoilAndImageModel {
   id              String @id @default(auto()) @map("_id") @db.ObjectId
   // Input Data
   temperature     Float // তাপমাত্রা (22)
@@ -57,10 +58,37 @@ model SoilModel {
   potassium       Float // পটাশিয়াম (22)
   cropType        String // ফসলের ধরন (Grape)
   diseaseDetected String // রোগ শনাক্তকরণ (Grape__healthy)
+  imageUrl        String // ছবির URL বা path
 
   // Analysis Results
   recommendedFertilizer String // প্রস্তাবিত সারের ধরন (SSP)
   treatmentSuggestion   String // চিকিৎসা পরামর্শ
+
+  // Metadata
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @db.ObjectId
+}
+
+// Stores raw soil inputs and the model's fertilizer prediction
+model SoilPrediction {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  // Input Data
+  temperature Float
+  phLevel     Float
+  soilColor   String
+  rainfall    Float
+  nitrogen    Float
+  phosphorous Float
+  potassium   Float
+  cropType    String
+
+  // Prediction Results
+  predictedFertilizer String
+  predictedTreatment  String?
+  confidence          Float?
 
   // Metadata
   createdAt DateTime @default(now())
