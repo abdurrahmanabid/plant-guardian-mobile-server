@@ -18,7 +18,7 @@ app.use(
   "/static/avatar",
   express.static(path.join(process.cwd(), "uploads/avatar"))
 );
-app.use(cors({ origin: FRONTEND, credentials: true }));
+app.use(cors({ origin: true, credentials: true }));
 
 // api
 app.use("/api/user", userRouter);
