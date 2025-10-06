@@ -19,8 +19,9 @@ export const createSoilModel = async (req: Request, res: Response) => {
       imageUrl,
       recommendedFertilizer,
       treatmentSuggestion,
+      confidence,
     } = req.body;
-
+    console.log('req.body in soilModelController', req.body);
     if (
       temperature === undefined ||
       phLevel === undefined ||
@@ -33,12 +34,13 @@ export const createSoilModel = async (req: Request, res: Response) => {
       !diseaseDetected ||
       !imageUrl ||
       !recommendedFertilizer ||
-      !treatmentSuggestion
+      !treatmentSuggestion ||
+      !confidence
     ) {
       return res.status(400).json({
         success: false,
         message:
-          "temperature, phLevel, soilColor, rainfall, nitrogen, phosphorous, potassium, cropType, diseaseDetected, imageUrl, recommendedFertilizer, treatmentSuggestion are required",
+          "temperature, phLevel, soilColor, rainfall, nitrogen, phosphorous, potassium, cropType, diseaseDetected, imageUrl, recommendedFertilizer, treatmentSuggestion, confidence are required",
       });
     }
 
@@ -56,6 +58,7 @@ export const createSoilModel = async (req: Request, res: Response) => {
         imageUrl,
         recommendedFertilizer,
         treatmentSuggestion,
+        confidence: parseFloat(confidence),
         user: { connect: { id: userId } },
       },
       include: {

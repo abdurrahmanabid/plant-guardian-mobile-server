@@ -9,8 +9,8 @@ import {
 
 const router = Router();
 
-// routes (mounted at /api/soil-model)
-router.post("/", createSoilModel);
+// routes (mounted at /api/soil-and-image-model)
+router.post("/save", createSoilModel);
 // {
 //   "temperature": 26.5,
 //   "phLevel": 6.8,
@@ -25,10 +25,10 @@ router.post("/", createSoilModel);
 //   "recommendedFertilizer": "SSP",
 //   "treatmentSuggestion": "No treatment needed"
 // }
-router.get("/", getUserSoilModels);
-router.get("/:id", getSoilModelById);
-router.put("/:id", updateSoilModel);
-router.delete("/:id", deleteSoilModel);
+router.get("/saved", getUserSoilModels);
+router.get("/saved/:id", getSoilModelById);
+router.put("/saved/:id", updateSoilModel);
+router.delete("/saved/:id", deleteSoilModel);
 
 export default router;
 

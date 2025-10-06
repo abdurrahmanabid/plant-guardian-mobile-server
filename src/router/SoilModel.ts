@@ -9,8 +9,8 @@ import {
 
 const router = Router();
 
-// routes (mounted at /api/soil)
-router.post("/", createSoilPrediction);
+// routes (mounted at /api/soil-model)
+router.post("/save", createSoilPrediction);
 // {
 //   "temperature": 26.5,
 //   "phLevel": 6.8,
@@ -24,10 +24,10 @@ router.post("/", createSoilPrediction);
 //   "predictedTreatment": "Apply 50kg/acre split into two doses",
 //   "confidence": 0.92
 // }
-router.get("/", getUserSoilPredictions);
-router.get("/:id", getSoilPredictionById);
-router.put("/:id", updateSoilPrediction);
-router.delete("/:id", deleteSoilPrediction);
+router.get("/saved", getUserSoilPredictions);
+router.get("/saved/:id", getSoilPredictionById);
+router.put("/saved/:id", updateSoilPrediction);
+router.delete("/saved/:id", deleteSoilPrediction);
 
 export default router;
 

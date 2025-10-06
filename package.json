@@ -33,7 +33,10 @@
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^17.2.0",
+    "expo-status-bar": "~3.0.8",
     "express": "^5.1.0",
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "react-native-navigation-bar": "^0.2.1",
+    "react-native-system-navigation-bar": "^2.6.4"
   }
 }

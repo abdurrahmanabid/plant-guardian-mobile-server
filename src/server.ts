@@ -5,8 +5,8 @@ import userRouter from "./router/UserRouter";
 import predictRouter from "./router/PredictedModelRouter";
 import gptRoute from "./router/GPTRouter";
 import modelRoute from "./router/ModelSaveRouter";
-import soilPredictionRoute from "./router/SoilPredictionRouter";
-import soilModelRoute from "./router/SoilModelRouter";
+import soilPredictionRoute from "./router/SoilModel";
+import soilModelRoute from "./router/SoilAndImageModelRouter";
 
 import path from "path";
 import cors from "cors";
@@ -20,6 +20,10 @@ app.use(
   "/static/avatar",
   express.static(path.join(process.cwd(), "uploads/avatar"))
 );
+app.use(
+  "/static/leaf",
+  express.static(path.join(process.cwd(), "uploads/leaf"))
+);
 app.use(cors({ origin: true, credentials: true }));
 
 // api
@@ -27,8 +31,8 @@ app.use("/api/user", userRouter);
 app.use("/api/predict", predictRouter);
 app.use("/api/gpt", gptRoute);
 app.use("/api/model", modelRoute);
-app.use("/api/soil", soilPredictionRoute);
-app.use("/api/soil-model", soilModelRoute);
+app.use("/api/soil-model", soilPredictionRoute);
+app.use("/api/soil-and-image-model", soilModelRoute);
 
 //server start
 app.listen(PORT, () => {

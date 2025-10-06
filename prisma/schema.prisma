@@ -59,6 +59,7 @@ model SoilAndImageModel {
   cropType        String // ফসলের ধরন (Grape)
   diseaseDetected String // রোগ শনাক্তকরণ (Grape__healthy)
   imageUrl        String // ছবির URL বা path
+  confidence      Float? // রোগ শনাক্তকরণের confidence level (0-1)
 
   // Analysis Results
   recommendedFertilizer String // প্রস্তাবিত সারের ধরন (SSP)

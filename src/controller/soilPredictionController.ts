@@ -19,6 +19,7 @@ export const createSoilPrediction = async (req: Request, res: Response) => {
       predictedTreatment,
       confidence,
     } = req.body;
+    console.log('req.body in soilPredictionController', req.body);
 
     if (
       temperature === undefined ||
