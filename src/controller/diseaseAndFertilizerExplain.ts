@@ -43,6 +43,7 @@ export const chatCompletion = async (
       });
       return;
     }
+console.log("Content",content)
 
     const response = await client.path("/chat/completions").post({
       body: {
@@ -66,7 +67,11 @@ export const chatCompletion = async (
     const responseBody = response.body as any;
     const aiResponse =
       responseBody.choices?.[0]?.message?.content || "No response generated";
-
+   console.log({
+      success: true,
+      response: aiResponse,
+      usage: responseBody.usage,
+    })
     res.json({
       success: true,
       response: aiResponse,
