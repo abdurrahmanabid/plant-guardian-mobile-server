@@ -39,7 +39,7 @@ export const diseasePredictionController = async (
 
     const axiosRes = await axios.post(requestURL, form, {
       headers: form.getHeaders(),     // multipart boundary
-      timeout: 15000,                 // optional but good
+      timeout: 150000,                 // optional but good
     });
 
     // 5000 সার্ভারের রেসপন্স ক্লায়েন্টকে ফেরত দেই
