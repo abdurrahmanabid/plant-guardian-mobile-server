@@ -7,11 +7,14 @@ export const jwtToken = (user: any, res: Response) => {
 
     // Set cookie expiration to match the token's expiration
     const expiresIn = 24 * 60 * 60 * 1000; // 1 day in milliseconds
+    const isProd = process.env.NODE_ENV === "production";
     const options: CookieOptions = {
       expires: new Date(Date.now() + expiresIn),
       httpOnly: true,
-      secure: false, // DEV: http হলে false
-      sameSite: "lax", // union literal: 'lax' | 'strict' | 'none'
+      // Cross-site cookies (frontend on Vercel) require both:
+      //   sameSite: 'none' AND secure: true
+      secure: isProd,
+      sameSite: isProd ? "none" : "lax",
       path: "/",
     };
 

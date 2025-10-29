@@ -24,7 +24,8 @@ app.use(
   "/static/leaf",
   express.static(path.join(process.cwd(), "uploads/leaf"))
 );
-app.use(cors({ origin: true, credentials: true }));
+// Public API: allow all origins without credentials (use Bearer tokens)
+app.use(cors({ origin: true, credentials: false }));
 
 // api
 app.use("/api/user", userRouter);

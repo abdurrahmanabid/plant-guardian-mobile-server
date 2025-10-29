@@ -9,10 +9,12 @@ export const isLoggedIn = async (
   res: Response,
   next: NextFunction
 ) => {
-  const token = req.cookies.token;
-  console.log("This os Token", token);
+  // Prefer Authorization: Bearer <token>; fallback to cookie
+  const authHeader = req.headers.authorization || "";
+  const bearer = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : undefined;
+  const token = bearer || req.cookies.token;
   if (!token) {
-    res.status(401).json({ message: "Please Login/Signup" });
+    return res.status(401).json({ message: "Please Login/Signup" });
   }
   const secret = process.env.JWT_SECRET;
   if (!secret) {
@@ -20,7 +22,7 @@ export const isLoggedIn = async (
   }
   const decoded = jwt.verify(token, secret) as DecodedToken;
   if (!decoded.userId) {
-    res.status(401).json({ message: "Please Login/Signup" });
+    return res.status(401).json({ message: "Please Login/Signup" });
   }
   const result = await prisma.user.findUnique({
     where: { id: decoded.userId },
