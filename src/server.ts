@@ -9,7 +9,7 @@ import soilPredictionRoute from "./router/SoilModel";
 import soilModelRoute from "./router/SoilAndImageModelRouter";
 
 import path from "path";
-import cors from "cors";
+import cors, { CorsOptions } from "cors";
 const app = express();
 const PORT = process.env.PORT;
 const FRONTEND = process.env.FRONTEND_SITE;
@@ -24,8 +24,16 @@ app.use(
   "/static/leaf",
   express.static(path.join(process.cwd(), "uploads/leaf"))
 );
-// Public API: allow all origins without credentials (use Bearer tokens)
-app.use(cors({ origin: true, credentials: false }));
+// Public API: allow all origins, no credentials; allow Authorization header
+const corsOptions: CorsOptions = {
+  origin: true,
+  credentials: false,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  optionsSuccessStatus: 204,
+};
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 // api
 app.use("/api/user", userRouter);
