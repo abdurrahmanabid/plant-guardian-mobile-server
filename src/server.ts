@@ -24,13 +24,11 @@ app.use(
   "/static/leaf",
   express.static(path.join(process.cwd(), "uploads/leaf"))
 );
-// Public API: allow all origins, no credentials; allow Authorization header
+// Public API: allow all origins; let CORS reflect headers automatically
 const corsOptions: CorsOptions = {
-  origin: true,
+  origin: "*",
   credentials: false,
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  optionsSuccessStatus: 204,
 };
 app.use(cors(corsOptions));
 
