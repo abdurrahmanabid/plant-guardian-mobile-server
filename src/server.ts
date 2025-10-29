@@ -33,7 +33,6 @@ const corsOptions: CorsOptions = {
   optionsSuccessStatus: 204,
 };
 app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
 
 // api
 app.use("/api/user", userRouter);
